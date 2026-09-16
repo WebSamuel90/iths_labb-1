@@ -1,5 +1,4 @@
 ﻿string stringToCheck = "29535123p48723487597645723645";
-var correctNumbers = new List<string>();
 long sum = 0;
 
 for  (int i = 0; i < stringToCheck.Length; i++)
@@ -8,8 +7,8 @@ for  (int i = 0; i < stringToCheck.Length; i++)
     {
         continue;
     }
-  
-    char start = stringToCheck[i];
+
+    // i and j could be used directly, but named positions improve readability
     int startPos = i;
 
     for (int j = startPos + 1; j < stringToCheck.Length; j++)
@@ -19,12 +18,13 @@ for  (int i = 0; i < stringToCheck.Length; i++)
         {
             break;
         }
-          
-        if (start == stringToCheck[j])
+
+
+        if (stringToCheck[i] == stringToCheck[j])
         {
             int endPos = j;
             string substring = stringToCheck.Substring(startPos, endPos - startPos + 1);
-            correctNumbers.Add(substring);
+            sum += long.Parse(substring);
 
             PrintSubstringWithColor(stringToCheck, startPos, endPos);
 
@@ -33,13 +33,8 @@ for  (int i = 0; i < stringToCheck.Length; i++)
             break;
         }
     }
-    Console.ResetColor();
 }
 
-foreach (var number in correctNumbers)
-{
-    sum += long.Parse(number);
-}
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine($"Sum: {sum}");
 Console.ResetColor();
